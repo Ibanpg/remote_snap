@@ -1,0 +1,16 @@
+{
+  "name": "dj-set-lens-stream",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently -k \"npm run dev --prefix web\" \"node server/signal.mjs\"",
+    "build": "npm run build --prefix web",
+    "preview": "npm run preview --prefix web",
+    "signal": "node server/signal.mjs"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
