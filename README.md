@@ -83,6 +83,17 @@ dj_set/
 └── web/                   # React app (Vite)
 ```
 
+## Deploying on Vercel
+
+The repo includes **`vercel.json`**: install runs in the repo root **and** in `web/`, build uses the root `npm run build`, and output is **`web/dist`**.
+
+1. Import the GitHub repo in Vercel (framework can stay “Other” or Vite — the JSON overrides install/build/output).  
+2. Add **environment variables** in the Vercel project (Settings → Environment Variables) — same names as `web/.env.example`, all prefixed with `VITE_` as in local dev.  
+3. **`VITE_SIGNAL_URL`**: the WebRTC signaling server is **not** serverless on Vercel. Deploy `server/signal.mjs` somewhere that keeps a long-lived WebSocket (e.g. [Railway](https://railway.app), [Fly.io](https://fly.io), [Render](https://render.com)) and set `VITE_SIGNAL_URL` to `wss://your-host` in production.  
+4. Redeploy after changing env vars.
+
+Client-side routes (e.g. `/session/:id`) rely on the SPA rewrite in `vercel.json`.
+
 ## Production notes
 
 - Serve the **Vite build** over **HTTPS**.  
